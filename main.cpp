@@ -17,7 +17,7 @@ const int MIN_CHANCE = 1;
 const int TOTAL_CHANCE = 100;
 
 // Function prototypes
-void displayDeque(const deque<Car> &tollBooth);
+void displayDeque(deque<Car> &tollBooth);
 
 // Main function
 int main()
@@ -33,7 +33,7 @@ int main()
     displayDeque(tollBooth);
 
     // Create an int to count the number of simulations
-    int count = 0;
+    int count = 1;
 
     // Create a loop to run the simulation
     while (!tollBooth.empty())          // While the deque is not empty
@@ -65,6 +65,9 @@ int main()
             // Call push_back() to add the Car object to the deque
             tollBooth.push_back(temp);
         }
+
+        // Display the queue at the end of the operation
+        displayDeque(tollBooth);
     }
 
     return 0;
@@ -72,24 +75,25 @@ int main()
 
 // Function implementations
 /*
-    function_name()
-    What the function does
-    Arguments: 
-        - argument 1: what it does
-        - argument 2: what it does
-    Return:
-        - what the function returns
+    displayDeque()
+    Display the whole deque of Car objects
+    Arguments:
+        - tollBooth: the deque containing all the Car objects
+    Return: none
 */
 void displayDeque(deque<Car> &tollBooth)
 {
     // Check whether the deque is empty
-    if (tollBooth.empty() == 0)
+    if (tollBooth.empty())
     {
         // Display a tab in front to mâtch the sample output
         cout << "\t";
 
         // Display a message
         cout << "Empty" << endl;
+
+        // Exit the function
+        return;
     }
 
     // Iterate through the deque
