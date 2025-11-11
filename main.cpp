@@ -11,12 +11,10 @@ using namespace std;
 
 // Constants
 const int INITIAL_DEQUE_SIZE = 2;
-const int HEAD_PAYS_TOLL = 55;
-const int CAR_JOINS_LINE = 45;
+const int SIMULATIONS = 20;
 const int MIN_CHANCE = 1;
 const int TOTAL_CHANCE = 100;
 const int NUMBER_OF_LANES = 4;
-const int SIMULATIONS = 20;
 
 // Function prototypes
 void displayArray(deque<Car> lanes[NUMBER_OF_LANES]);
@@ -44,7 +42,45 @@ int main()
     // Create a loop and run 20 times
     for (int i = 0; i < SIMULATIONS; i++)
     {
-        // Simulate the events
+        // Display the Time
+        cout << "Time: " << i + 1 << endl;
+
+        // Iterate through each lane (deque) in the array
+        for (int j = 0; j < NUMBER_OF_LANES; j++)
+        {
+            // Display the lane number
+            cout << "Lane: " << j + 1 << " ";
+
+            // Generate a random chance
+            int chance = rand() % TOTAL_CHANCE + 1;
+
+            // Simulate the events
+            if (chance <= 50)          // 50% chance the head Car pays and leaves
+            {
+                // Display a message
+                cout << "Paid: ";
+                
+                // Display the Car object using the print() function
+                lanes[j].front().print();
+
+                // Remove the Car in the front of the deque
+                lanes[j].pop_front();
+            }
+            else                       // 50% chance a Car joins the queue
+            {
+                // Display a message
+                cout << "Joined: ";
+                
+                // Display the Car object using the print() function
+                lanes[j].front().print();
+
+                // Remove the Car in the front of the deque
+                lanes[j].pop_front();
+            }
+        }
+
+        // Display all the deque (lanes) after each simulation
+        displayArray(lanes);
     }
 
     return 0;
