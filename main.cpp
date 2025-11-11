@@ -21,6 +21,7 @@ const int REAR_SHIFTS_LANE = 15;
 const int CAR_JOINS_EMPTY_LANE = 50;
 
 // Function prototypes
+void displayInitialArray(deque<Car> lanes[NUMBER_OF_LANES]);
 void displayArray(deque<Car> lanes[NUMBER_OF_LANES]);
 void carJoins(deque<Car> &lane);
 void carLeaves(deque<Car> &lane);
@@ -43,9 +44,12 @@ int main()
         lanes[i] = deque<Car>(INITIAL_DEQUE_SIZE);
     }
 
-    // Display the initial deque
+    // Display the initial array
     cout << "Initial queue: " << endl;
-    displayArray(lanes);
+    displayInitialArray(lanes);
+
+    // Enter a new line
+    cout << endl;
 
     // Create a loop and run 20 times
     for (int i = 0; i < SIMULATIONS; i++)
@@ -107,8 +111,44 @@ int main()
 // Function implementations
 /*
     displayInitialArray()
-    Display the initial array 
+    Display the initial array of deque containing Car objects
+    Arguments:
+        - lanes: the array of deque containing all the Car objects (passed by const)
+    Return: none
 */
+void displayInitialArray(deque<Car> lanes[NUMBER_OF_LANES])
+{    
+    // Iterate through the array
+    for (int i = 0; i < NUMBER_OF_LANES; i++)
+    {
+        // Display the lane number
+        cout << "Lane " << i + 1;                        // No "Queue" word (to match the sample output)
+
+        // Check whether the lane is empty or not
+        if (lanes[i].empty())
+        {
+            // Display a message
+            cout << "empty" << endl;
+
+            // Skip to the next lane
+            continue;
+        }
+
+        // Enter a new line to display the queue
+        cout << endl;
+
+        // Iterate through each deque
+        for (int j = 0; j < lanes[i].size(); j++)
+        {
+            // Display a tab in front to match the sample output
+            cout << "\t";
+
+            // Use the print() member function to display the Car object
+            lanes[i].at(j).print();
+        }
+    }
+}
+
 /*
     displayArray()
     Display the whole array of deque containing Car objects
@@ -122,7 +162,7 @@ void displayArray(deque<Car> lanes[NUMBER_OF_LANES])
     for (int i = 0; i < NUMBER_OF_LANES; i++)
     {
         // Display the lane number
-        cout << "Lane " << i + 1 << " Queue: ";
+        cout << "Lane " << i + 1 << " Queue: ";          // Display a "Queue" word (to match the sample output)
 
         // Check whether the lane is empty or not
         if (lanes[i].empty())
@@ -258,7 +298,7 @@ void emptyLane(deque<Car> &lane)
     else                                         // The other 50% chance
     {
         // Otherwise, nothing happens
-        // Exit the function
-        return;
+        // Display a message
+        cout << "(Nothing happen)" << endl;
     }
 }
