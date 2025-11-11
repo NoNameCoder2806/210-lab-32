@@ -106,6 +106,10 @@ int main()
 
 // Function implementations
 /*
+    displayInitialArray()
+    Display the initial array 
+*/
+/*
     displayArray()
     Display the whole array of deque containing Car objects
     Arguments:
