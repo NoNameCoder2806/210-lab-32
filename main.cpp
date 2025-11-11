@@ -18,6 +18,8 @@ const int NUMBER_OF_LANES = 4;
 
 // Function prototypes
 void displayArray(deque<Car> lanes[NUMBER_OF_LANES]);
+void carJoins(deque<Car> &lane);
+void carLeaves(deque<Car> &lane);
 
 // Main function
 int main()
@@ -107,7 +109,7 @@ int main()
     displayArray()
     Display the whole array of deque containing Car objects
     Arguments:
-        - lanes: the array of deque containing all the Car objects
+        - lanes: the array of deque containing all the Car objects (passed by const)
     Return: none
 */
 void displayArray(deque<Car> lanes[NUMBER_OF_LANES])
@@ -141,4 +143,31 @@ void displayArray(deque<Car> lanes[NUMBER_OF_LANES])
             lanes[i].at(j).print();
         }
     }
+}
+
+void carJoins(deque<Car> &lane)
+{
+
+}
+
+void carLeaves(deque<Car> &lane)
+{
+    // Check whether the deque is empty or not
+    if (lane.empty())
+    {
+        // Enter a new line for formatting
+        cout << endl;
+
+        // Ignore the lane and exit the function
+        return;    
+    }
+
+    // Display a message
+    cout << "Paid: ";
+    
+    // Display the Car object using the print() function
+    lane.front().print();
+
+    // Remove the Car in the front of the deque
+    lane.pop_front();
 }
