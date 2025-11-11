@@ -18,12 +18,14 @@ const int NUMBER_OF_LANES = 4;
 const int HEAD_PAYS_TOLL = 46;
 const int CAR_JOINS_QUEUE = 39;
 const int REAR_SHIFTS_LANE = 15;
+const int CAR_JOINS_EMPTY_LANE = 50;
 
 // Function prototypes
 void displayArray(deque<Car> lanes[NUMBER_OF_LANES]);
 void carJoins(deque<Car> &lane);
 void carLeaves(deque<Car> &lane);
 void shiftLane(deque<Car> lanes[NUMBER_OF_LANES], int lane);
+void emptyLane(deque<Car> &lane);
 
 // Main function
 int main()
@@ -56,6 +58,23 @@ int main()
         {
             // Display the lane number
             cout << "Lane: " << j + 1 << " ";
+
+            // Check whether the deque (lane) is empty or not
+            if (lanes[j].empty())
+            {
+                // If the lane is empty, the probabilities will be just 50/50 if a new Car enters or not
+                // Call the emptyLane() function to simulate this special situation
+                emptyLane(lanes[j]);
+
+                // Skip to the next deque in the array
+                continue;
+            }
+            else
+            {
+                // Otherwise if the lane is not empty, we simulate normally
+                // Generate a random chance
+
+            }
 
             // Generate a random chance
             int chance = rand() % TOTAL_CHANCE + 1;
@@ -128,7 +147,7 @@ void displayArray(deque<Car> lanes[NUMBER_OF_LANES])
     carJoins()
     A Car joins the lane at the back
     Arguments:
-        - lane: the deque representing the lane in simulation
+        - lane: the deque representing the lane in simulation (passed by reference)
     Return: none
 */
 void carJoins(deque<Car> &lane)
@@ -150,7 +169,7 @@ void carJoins(deque<Car> &lane)
     carLeaves()
     The Car at the front pays its toll and leaves the queue
     Arguments:
-        - lane: the deque representing the lane in simulation
+        - lane: the deque representing the lane in simulation (passed by reference)
     Return: none
 */
 void carLeaves(deque<Car> &lane)
@@ -209,4 +228,30 @@ void shiftLane(deque<Car> lanes[NUMBER_OF_LANES], int lane)
 
     // Add the rear Car to the new lane
     lanes[newLane].push_back(temp);
+}
+
+/*
+    emptyLane()
+    Simulate the empty lanes
+    Arguments:
+        - lane: the deque representing the lane in simulation (passed by reference)
+    Return: none
+*/
+void emptyLane(deque<Car> &lane)
+{
+    // If the lane is empty, the chance for a Car to join will only be 50/50
+    // Generate a random chance
+    int chance = rand() % TOTAL_CHANCE + 1;
+
+    // Check the chance
+    if (chance <= CAR_JOINS_EMPTY_LANE)
+    {
+        // Call the carJoins() function to add a new Car to the lane
+        carJoins(lane);
+    }
+    else
+    {
+        // Exit the function
+        return;
+    }
 }
