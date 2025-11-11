@@ -172,6 +172,7 @@ void shiftLane(deque<Car> lanes[NUMBER_OF_LANES], int lane)
 
     // Create a temporary Car object to store the rear Car to switch
     Car temp = lanes[lane].back();
+    
 
     // Remove the rear Car from the original lane
     lanes[lane].pop_back();
