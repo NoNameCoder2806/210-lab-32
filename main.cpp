@@ -62,7 +62,7 @@ int main()
                 {
                     // Enter a new line for formatting
                     cout << endl;
-                    
+
                     // Ignore the lane
                     continue;    
                 }
@@ -94,6 +94,9 @@ int main()
 
         // Display all the deque (lanes) after each simulation
         displayArray(lanes);
+
+        // Enter a new line
+        cout << endl;
     }
 
     return 0;
@@ -113,7 +116,20 @@ void displayArray(deque<Car> lanes[NUMBER_OF_LANES])
     for (int i = 0; i < NUMBER_OF_LANES; i++)
     {
         // Display the lane number
-        cout << "Lane " << i + 1 << ":" << endl;
+        cout << "Lane " << i + 1 << " Queue: ";
+
+        // Check whether the lane is empty or not
+        if (lanes[i].empty())
+        {
+            // Display a message
+            cout << "empty" << endl;
+
+            // Skip to the next lane
+            continue;
+        }
+
+        // Enter a new line to display the queue
+        cout << endl;
 
         // Iterate through each deque
         for (int j = 0; j < lanes[i].size(); j++)
