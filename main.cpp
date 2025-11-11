@@ -15,6 +15,9 @@ const int SIMULATIONS = 20;
 const int MIN_CHANCE = 1;
 const int TOTAL_CHANCE = 100;
 const int NUMBER_OF_LANES = 4;
+const int HEAD_PAYS_TOLL = 46;
+const int CAR_JOINS_QUEUE = 39;
+const int REAR_SHIFTS_LANE = 15;
 
 // Function prototypes
 void displayArray(deque<Car> lanes[NUMBER_OF_LANES]);
@@ -121,6 +124,13 @@ void displayArray(deque<Car> lanes[NUMBER_OF_LANES])
     }
 }
 
+/*
+    carJoins()
+    A Car joins the lane at the back
+    Arguments:
+        - lane: the deque representing the lane in simulation
+    Return: none
+*/
 void carJoins(deque<Car> &lane)
 {
     // Create a temporary Car object
@@ -136,6 +146,13 @@ void carJoins(deque<Car> &lane)
     lane.push_back(temp);
 }
 
+/*
+    carLeaves()
+    The Car at the front pays its toll and leaves the queue
+    Arguments:
+        - lane: the deque representing the lane in simulation
+    Return: none
+*/
 void carLeaves(deque<Car> &lane)
 {
     // Check whether the deque is empty or not
@@ -158,6 +175,14 @@ void carLeaves(deque<Car> &lane)
     lane.pop_front();
 }
 
+/*
+    shiftLane()
+    The Car shifts from the original lane to another one randomly
+    Arguments:
+        - lanes: the array of deque containing all the Car objects
+        - lane: the index of the original lane
+    Return: none
+*/
 void shiftLane(deque<Car> lanes[NUMBER_OF_LANES], int lane)
 {
     // Create an int to store the new lane index
@@ -173,9 +198,14 @@ void shiftLane(deque<Car> lanes[NUMBER_OF_LANES], int lane)
     // Create a temporary Car object to store the rear Car to switch
     Car temp = lanes[lane].back();
     
-
     // Remove the rear Car from the original lane
     lanes[lane].pop_back();
+
+    // Display a message
+    cout << "Switched: ";
+
+    // Call the print() member function to display the Car's information
+    temp.print();
 
     // Add the rear Car to the new lane
     lanes[newLane].push_back(temp);
