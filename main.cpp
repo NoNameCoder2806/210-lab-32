@@ -57,6 +57,16 @@ int main()
             // Simulate the events
             if (chance <= 50)          // 50% chance the head Car pays and leaves
             {
+                // Check whether the deque is empty or not
+                if (lanes[j].empty())
+                {
+                    // Enter a new line for formatting
+                    cout << endl;
+                    
+                    // Ignore the lane
+                    continue;    
+                }
+
                 // Display a message
                 cout << "Paid: ";
                 
@@ -68,14 +78,17 @@ int main()
             }
             else                       // 50% chance a Car joins the queue
             {
+                // Create a temporary Car object
+                Car temp;
+
                 // Display a message
                 cout << "Joined: ";
                 
                 // Display the Car object using the print() function
-                lanes[j].front().print();
+                temp.print();
 
-                // Remove the Car in the front of the deque
-                lanes[j].pop_front();
+                // Add the Car to the back of the deque
+                lanes[j].push_back(temp);
             }
         }
 
