@@ -29,6 +29,13 @@ int main()
     // Create an array of deque containing Car objects
     deque<Car> lanes[NUMBER_OF_LANES];
 
+    // Populate the array with 4 Car deque (2 Car objects each)
+    for (int i = 0; i < NUMBER_OF_LANES; i++)
+    {
+        // Add the deque into the array
+        lanes[i] = deque<Car>(INITIAL_DEQUE_SIZE);
+    }
+
     // Display the initial deque
     cout << "Initial queue: " << endl;
     displayArray(lanes);
