@@ -1,0 +1,87 @@
+// COMSC-210 | Lab 33 | Dat Hoang Vien
+// IDE used: Visual Studio Code
+
+// Define the Car class
+#ifndef CAR_H
+#define CAR_H
+
+// Libraries
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+// Constants
+const int YEAR_MIN = 1990, YEAR_MAX = 2024;
+const int XP_MIN = 1000, XP_MAX = 9999;
+const int NR_MANUFACTURERS = 25;
+
+// Car class
+class Car
+{
+private:
+    string make;              // The make of the Car object
+    int year;                 // The manufactured year of the Car object
+    int transponder;          // The transponder number of the Car object
+
+    // All the possible manufacturers
+    string manufacturers[NR_MANUFACTURERS] = 
+        {"Toyota", "Ford", "Volkswagen", "Honda", "Chevrolet", "Nissan", "BMW", 
+         "Mercedes-Benz", "Audi", "Hyundai", "Kia", "Subaru", "Mazda", "Tesla", 
+         "Jaguar", "Fiat", "Land Rover", "Mitsubishi", "Peugeot", "Renault", 
+         "Porsche", "Lexus", "Volvo", "Skoda", "Infiniti"};
+
+public:
+    // Default constructor
+    Car()
+    {
+        make = manufacturers[rand() % NR_MANUFACTURERS];
+        year = rand() % (YEAR_MAX - YEAR_MIN + 1) + YEAR_MIN;
+        transponder = rand() % (XP_MAX - XP_MIN + 1) + XP_MIN;
+    }
+
+    // Accessors / Getters
+    string getMake()          
+    {
+        return make;
+    }
+
+    int getYear()             
+    {
+        return year;
+    }
+
+    int getTransponder()     
+    { 
+        return transponder;
+    }
+
+    // Mutators / Setters
+    void setMake(string mk)   
+    {
+        make = mk;
+    }
+
+    void setYear(int yr)      
+    {
+        year = yr;
+    }
+
+    void setTransponder(int t) 
+    { 
+        transponder = t;
+    }
+
+    // Member function
+    /*
+        print()
+        Print the information of the Car object
+    */
+    void print()
+    {
+        cout << "[" << year << " " << make << " (" << transponder << ")]\n";
+    }
+
+};
+
+// End of the Car.h file
+#endif
