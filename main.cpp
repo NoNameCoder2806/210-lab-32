@@ -76,8 +76,8 @@ int main()
             else
             {
                 // Otherwise if the lane is not empty, we simulate normally
-                // Generate a random chance
-                int chance = rand() % TOTAL_CHANCE + 1;
+                // Generate a random chance (ranges from 1 - 100)
+                int chance = rand() % TOTAL_CHANCE + MIN_CHANCE;
 
                 // Check the chances to simulate the events
                 if (chance <= HEAD_PAYS_TOLL)                                 // The first 46%     
@@ -286,8 +286,8 @@ void shiftLane(deque<Car> lanes[NUMBER_OF_LANES], int lane)
 void emptyLane(deque<Car> &lane)
 {
     // If the lane is empty, the chance for a Car to join will only be 50/50
-    // Generate a random chance
-    int chance = rand() % TOTAL_CHANCE + 1;
+    // Generate a random chance (ranges from 1 - 100)
+    int chance = rand() % TOTAL_CHANCE + MIN_CHANCE;
 
     // Check the chance
     if (chance <= CAR_JOINS_EMPTY_LANE)          // 50% chance
