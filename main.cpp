@@ -73,22 +73,24 @@ int main()
             {
                 // Otherwise if the lane is not empty, we simulate normally
                 // Generate a random chance
+                int chance = rand() % TOTAL_CHANCE + 1;
 
-            }
-
-            // Generate a random chance
-            int chance = rand() % TOTAL_CHANCE + 1;
-
-            // Simulate the events
-            if (chance <= 50)          // 50% chance the head Car pays and leaves
-            {
-                // Call the carLeaves() function
-                carLeaves(lanes[j]);
-            }
-            else                       // 50% chance a Car joins the queue
-            {
-                // Call the carJoins() function
-                carJoins(lanes[j]);
+                // Check the chances to simulate the events
+                if (chance <= HEAD_PAYS_TOLL)                                 // The first 46%     
+                {
+                    // Call the carLeaves() function and pass the lane in
+                    carLeaves(lanes[j]);
+                }
+                else if (chance <= HEAD_PAYS_TOLL + CAR_JOINS_QUEUE)          // The next 39%
+                {
+                    // Call the carJoins() function and pass the lane in
+                    carJoins(lanes[j]);
+                }
+                else                                                          // The last 15%
+                {
+                    // Call the shiftLane() function, pass in the array and the lane's index
+                    shiftLane(lanes, j);
+                }
             }
         }
 
@@ -244,13 +246,14 @@ void emptyLane(deque<Car> &lane)
     int chance = rand() % TOTAL_CHANCE + 1;
 
     // Check the chance
-    if (chance <= CAR_JOINS_EMPTY_LANE)
+    if (chance <= CAR_JOINS_EMPTY_LANE)          // 50% chance
     {
         // Call the carJoins() function to add a new Car to the lane
         carJoins(lane);
     }
-    else
+    else                                         // The other 50% chance
     {
+        // Otherwise, nothing happens
         // Exit the function
         return;
     }
