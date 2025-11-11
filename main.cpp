@@ -16,6 +16,7 @@ const int CAR_JOINS_LINE = 45;
 const int MIN_CHANCE = 1;
 const int TOTAL_CHANCE = 100;
 const int NUMBER_OF_LANES = 4;
+const int SIMULATIONS = 20;
 
 // Function prototypes
 void displayArray(deque<Car> lanes[NUMBER_OF_LANES]);
@@ -40,8 +41,11 @@ int main()
     cout << "Initial queue: " << endl;
     displayArray(lanes);
 
-    // Create an int to count the number of simulations
-    int count = 1;
+    // Create a loop and run 20 times
+    for (int i = 0; i < SIMULATIONS; i++)
+    {
+        // Simulate the events
+    }
 
     return 0;
 }
