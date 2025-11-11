@@ -20,6 +20,7 @@ const int NUMBER_OF_LANES = 4;
 void displayArray(deque<Car> lanes[NUMBER_OF_LANES]);
 void carJoins(deque<Car> &lane);
 void carLeaves(deque<Car> &lane);
+void shiftLane(deque<Car> lanes[NUMBER_OF_LANES], int lane);
 
 // Main function
 int main()
@@ -59,38 +60,13 @@ int main()
             // Simulate the events
             if (chance <= 50)          // 50% chance the head Car pays and leaves
             {
-                // Check whether the deque is empty or not
-                if (lanes[j].empty())
-                {
-                    // Enter a new line for formatting
-                    cout << endl;
-
-                    // Ignore the lane
-                    continue;    
-                }
-
-                // Display a message
-                cout << "Paid: ";
-                
-                // Display the Car object using the print() function
-                lanes[j].front().print();
-
-                // Remove the Car in the front of the deque
-                lanes[j].pop_front();
+                // Call the carLeaves() function
+                carLeaves(lanes[j]);
             }
             else                       // 50% chance a Car joins the queue
             {
-                // Create a temporary Car object
-                Car temp;
-
-                // Display a message
-                cout << "Joined: ";
-                
-                // Display the Car object using the print() function
-                temp.print();
-
-                // Add the Car to the back of the deque
-                lanes[j].push_back(temp);
+                // Call the carJoins() function
+                carJoins(lanes[j]);
             }
         }
 
@@ -147,7 +123,17 @@ void displayArray(deque<Car> lanes[NUMBER_OF_LANES])
 
 void carJoins(deque<Car> &lane)
 {
+    // Create a temporary Car object
+    Car temp;
 
+    // Display a message
+    cout << "Joined: ";
+    
+    // Display the Car object using the print() function
+    temp.print();
+
+    // Add the Car to the back of the deque
+    lane.push_back(temp);
 }
 
 void carLeaves(deque<Car> &lane)
@@ -170,4 +156,26 @@ void carLeaves(deque<Car> &lane)
 
     // Remove the Car in the front of the deque
     lane.pop_front();
+}
+
+void shiftLane(deque<Car> lanes[NUMBER_OF_LANES], int lane)
+{
+    // Create an int to store the new lane index
+    int newLane = lane;
+    
+    // Generate until we get a new lane
+    while (newLane == lane)
+    {
+        // Generate a new lane index
+        newLane = rand() % NUMBER_OF_LANES;
+    }
+
+    // Create a temporary Car object to store the rear Car to switch
+    Car temp = lanes[lane].back();
+
+    // Remove the rear Car from the original lane
+    lanes[lane].pop_back();
+
+    // Add the rear Car to the new lane
+    lanes[newLane].push_back(temp);
 }
