@@ -52,6 +52,9 @@ void displayArray(deque<Car> lanes[NUMBER_OF_LANES])
     // Iterate through the array
     for (int i = 0; i < NUMBER_OF_LANES; i++)
     {
+        // Display the lane number
+        cout << "Lane " << i + 1 << ":" << endl;
+
         // Iterate through each deque
         for (int j = 0; j < lanes[i].size(); j++)
         {
